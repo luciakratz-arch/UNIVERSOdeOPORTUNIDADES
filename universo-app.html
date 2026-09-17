@@ -1,0 +1,1757 @@
+<title>Universo de Oportunidades</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --azul: #1B3A6B;
+    --azul-medio: #2E6DB4;
+    --azul-claro: #E8F0FB;
+    --vermelho: #C0392B;
+    --verde: #27AE60;
+    --amarelo: #F39C12;
+    --branco: #FFFFFF;
+    --cinza-bg: #F4F6FA;
+    --cinza-borda: #D8E0ED;
+    --texto: #1A2340;
+    --texto-sec: #5A6A84;
+    --card-bg: #FFFFFF;
+    --input-bg: #FFFFFF;
+    --shadow: 0 2px 12px rgba(27,58,107,0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --azul: #4A90D9;
+      --azul-medio: #6AABF7;
+      --azul-claro: #1A2A45;
+      --vermelho: #E74C3C;
+      --verde: #2ECC71;
+      --branco: #0F1924;
+      --cinza-bg: #111C2D;
+      --cinza-borda: #2A3A55;
+      --texto: #E8EDF7;
+      --texto-sec: #8FA0BC;
+      --card-bg: #162035;
+      --input-bg: #1A2A3F;
+      --shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --azul: #4A90D9;
+    --azul-medio: #6AABF7;
+    --azul-claro: #1A2A45;
+    --vermelho: #E74C3C;
+    --verde: #2ECC71;
+    --branco: #0F1924;
+    --cinza-bg: #111C2D;
+    --cinza-borda: #2A3A55;
+    --texto: #E8EDF7;
+    --texto-sec: #8FA0BC;
+    --card-bg: #162035;
+    --input-bg: #1A2A3F;
+    --shadow: 0 2px 12px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cinza-bg);
+    color: var(--texto);
+    min-height: 100%;
+    padding-inline: 0;
+    padding-block: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--azul);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header-logo svg { width: 160px; height: 54px; flex-shrink: 0; }
+  .header-title {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+  .header-subtitle {
+    color: rgba(255,255,255,0.75);
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .header-badge {
+    display: inline-block;
+    margin-top: 5px;
+    background: #C0392B;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.4px;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: var(--azul);
+    padding: 0 20px 14px;
+  }
+  .progress-steps {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .progress-step {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.25);
+    flex: 1;
+    transition: background 0.3s;
+  }
+  .progress-step.done { background: rgba(255,255,255,0.85); }
+  .progress-step.active { background: #F39C12; }
+  .progress-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-header {
+    margin-bottom: 20px;
+  }
+  .section-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--azul-medio);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--texto);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--texto-sec);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--cinza-borda);
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--azul-claro);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title-icon {
+    background: var(--azul-claro);
+    border-radius: 6px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  /* FORM ELEMENTS */
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-sec);
+    margin-bottom: 5px;
+    letter-spacing: 0.2px;
+  }
+  label .req { color: var(--vermelho); margin-left: 2px; }
+  input[type="text"], input[type="tel"], input[type="email"], input[type="number"], select, textarea {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1.5px solid var(--cinza-borda);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    transition: border-color 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--azul-medio);
+    box-shadow: 0 0 0 3px rgba(46,109,180,0.12);
+  }
+  textarea { min-height: 80px; resize: vertical; }
+
+  /* RADIO/CHECK GROUPS */
+  .radio-group, .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .radio-item, .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--cinza-borda);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--input-bg);
+  }
+  .radio-item:hover, .check-item:hover {
+    border-color: var(--azul-medio);
+    background: var(--azul-claro);
+  }
+  .radio-item.selected, .check-item.selected {
+    border-color: var(--azul-medio);
+    background: var(--azul-claro);
+  }
+  .radio-item input[type="radio"], .check-item input[type="checkbox"] {
+    width: auto;
+    margin-top: 2px;
+    accent-color: var(--azul-medio);
+    flex-shrink: 0;
+  }
+  .radio-label, .check-label {
+    font-size: 13px;
+    color: var(--texto);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* SCALE */
+  .scale-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .scale-btn {
+    flex: 1;
+    padding: 8px 4px;
+    border-radius: 8px;
+    border: 1.5px solid var(--cinza-borda);
+    background: var(--input-bg);
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--texto-sec);
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .scale-btn:hover { border-color: var(--azul-medio); }
+  .scale-btn.selected {
+    background: var(--azul-medio);
+    border-color: var(--azul-medio);
+    color: white;
+  }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .scale-label { font-size: 10px; color: var(--texto-sec); }
+  .scale-group { margin-bottom: 16px; }
+  .scale-title { font-size: 12px; font-weight: 600; color: var(--texto); margin-bottom: 6px; }
+
+  /* LGPD */
+  .lgpd-box {
+    background: var(--azul-claro);
+    border: 1.5px solid var(--azul-medio);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .lgpd-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: 8px;
+  }
+  .lgpd-text {
+    font-size: 12px;
+    color: var(--texto-sec);
+    line-height: 1.6;
+  }
+  .lgpd-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 10px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1.5px solid var(--cinza-borda);
+    cursor: pointer;
+  }
+  .lgpd-check input { accent-color: var(--azul-medio); margin-top: 2px; }
+  .lgpd-check-label { font-size: 12px; font-weight: 500; color: var(--texto); line-height: 1.5; }
+
+  /* BUTTONS */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .btn {
+    flex: 1;
+    padding: 13px 20px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary {
+    background: var(--azul);
+    color: white;
+  }
+  .btn-primary:hover { background: #142d55; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--azul-medio);
+    border: 1.5px solid var(--azul-medio);
+    flex: 0 0 auto;
+    padding: 13px 18px;
+  }
+  .btn-secondary:hover { background: var(--azul-claro); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-whatsapp:hover { background: #1ebe5d; }
+
+  /* LAUDO */
+  .laudo-container { display: none; }
+  .laudo-header {
+    background: var(--azul);
+    color: white;
+    padding: 20px;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+  }
+  .laudo-logo { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; margin-bottom: 4px; }
+  .laudo-subtitulo { font-size: 12px; opacity: 0.8; }
+  .laudo-body {
+    background: var(--card-bg);
+    border: 1px solid var(--cinza-borda);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .laudo-nome { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--azul); margin-bottom: 4px; }
+  .laudo-meta { font-size: 12px; color: var(--texto-sec); margin-bottom: 16px; }
+  .laudo-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--azul);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    background: var(--azul-claro);
+    border-left: 4px solid var(--azul-medio);
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0 10px;
+  }
+  .laudo-text { font-size: 13px; color: var(--texto); line-height: 1.7; margin-bottom: 10px; }
+  .laudo-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .laudo-chip {
+    background: var(--azul-claro);
+    color: var(--azul);
+    border: 1px solid var(--azul-medio);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .laudo-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .laudo-score-label { font-size: 12px; color: var(--texto-sec); flex: 1; }
+  .laudo-score-bar { flex: 2; height: 8px; background: var(--cinza-borda); border-radius: 4px; overflow: hidden; }
+  .laudo-score-fill { height: 100%; border-radius: 4px; background: var(--azul-medio); transition: width 0.8s ease; }
+  .laudo-score-num { font-size: 12px; font-weight: 700; color: var(--azul); width: 24px; text-align: right; }
+  .laudo-destaque {
+    background: linear-gradient(135deg, var(--azul-claro) 0%, rgba(46,109,180,0.08) 100%);
+    border: 1px solid var(--azul-medio);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .laudo-destaque-title { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--azul-medio); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .laudo-rodape {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--cinza-borda);
+    font-size: 11px;
+    color: var(--texto-sec);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* LOADING */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(27,58,107,0.92);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  .loading-overlay.active { display: flex; }
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255,255,255,0.2);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; }
+  .loading-sub { font-size: 13px; opacity: 0.75; max-width: 280px; line-height: 1.5; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1A2340;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 300;
+    transition: transform 0.3s;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.success { background: #155724; }
+  .toast.error { background: #721c24; }
+
+  /* WELCOME */
+  .welcome-card {
+    background: var(--azul);
+    border-radius: 14px;
+    padding: 28px 24px;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .welcome-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .welcome-icon { font-size: 42px; margin-bottom: 12px; }
+  .welcome-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .welcome-desc {
+    font-size: 13px;
+    opacity: 0.85;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .welcome-badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .welcome-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .etapas-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .etapa-item {
+    background: var(--card-bg);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .etapa-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--azul-medio);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .etapa-desc {
+    font-size: 10px;
+    color: var(--texto-sec);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .field-hint { font-size: 11px; color: var(--texto-sec); margin-top: 4px; }
+  .required-note { font-size: 11px; color: var(--texto-sec); margin-bottom: 14px; }
+
+  /* CHECKBOX GRID */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  @media (max-width: 420px) { .check-grid { grid-template-columns: 1fr; } }
+  .check-grid .check-item {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .check-grid .check-label { font-size: 12px; }
+
+  /* LAUDO BOTÕES */
+  .laudo-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .btn-full { width: 100%; justify-content: center; }
+
+  .welcome-adm-badge {
+    background: linear-gradient(135deg, #1B3A6B, #2E6DB4);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.3px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: 10px 0 14px;
+    border-left: 4px solid #C0392B;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* CONTEÚDO DO LAUDO */
+  #laudo-conteudo { white-space: pre-wrap; font-size: 13px; line-height: 1.7; }
+</style>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-title">Gerando seu laudo...</div>
+  <div class="loading-sub">Estamos analisando seu perfil de empregabilidade e preparando uma orientação personalizada.</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">
+    <!-- Logo UNIVERSO sem container — texto direto no fundo azul do header -->
+    <svg viewBox="0 0 200 54" xmlns="http://www.w3.org/2000/svg">
+      <text x="4" y="34" font-family="Arial Black, Arial" font-weight="900" font-size="30" fill="white" letter-spacing="1">UNIVERSO</text>
+      <text x="4" y="50" font-family="Arial" font-weight="600" font-size="9.5" fill="rgba(255,255,255,0.80)" letter-spacing="0.8">CENTRO UNIVERSO GOIÂNIA</text>
+    </svg>
+  </div>
+  <div>
+    <div class="header-title">Universo de Oportunidades</div>
+    <div class="header-subtitle">Questionário de Empregabilidade</div>
+    <div class="header-badge">🎓 Projeto do Curso de Administração</div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap" id="progress-wrap">
+  <div class="progress-label" id="progress-label">Bem-vindo</div>
+  <div class="progress-steps" id="progress-steps">
+    <div class="progress-step active" data-step="0"></div>
+    <div class="progress-step" data-step="1"></div>
+    <div class="progress-step" data-step="2"></div>
+    <div class="progress-step" data-step="3"></div>
+    <div class="progress-step" data-step="4"></div>
+    <div class="progress-step" data-step="5"></div>
+    <div class="progress-step" data-step="6"></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ===== SEÇÃO 0: BEM-VINDO ===== -->
+  <div class="section active" id="sec-0">
+    <div class="welcome-card">
+      <div class="welcome-icon">🌟</div>
+      <div class="welcome-title">Universo de Oportunidades</div>
+      <div class="welcome-adm-badge">🎓 Projeto de Extensão · Curso de Administração · UNIVERSO Goiânia</div>
+      <div class="welcome-desc">Descubra seu perfil profissional e receba uma orientação personalizada para impulsionar sua carreira.</div>
+      <div class="welcome-badges">
+        <span class="welcome-badge">✅ 100% Gratuito</span>
+        <span class="welcome-badge">⚡ Laudo na hora</span>
+        <span class="welcome-badge">📲 Via WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="etapas-info">
+      <div class="etapa-item">
+        <div class="etapa-num">15</div>
+        <div class="etapa-desc">Seções do questionário</div>
+      </div>
+      <div class="etapa-item">
+        <div class="etapa-num">~10</div>
+        <div class="etapa-desc">Minutos para preencher</div>
+      </div>
+      <div class="etapa-item">
+        <div class="etapa-num">100%</div>
+        <div class="etapa-desc">Personalizado pra você</div>
+      </div>
+    </div>
+
+    <div class="lgpd-box">
+      <div class="lgpd-title">🔒 Privacidade e LGPD</div>
+      <div class="lgpd-text">Seus dados são coletados com base na Lei Geral de Proteção de Dados (LGPD – Lei 13.709/2018) e serão utilizados exclusivamente para fins de orientação profissional e participação nas ações do projeto Universo de Oportunidades do Centro Universo Goiânia.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">📝</span> Como funciona</div>
+      <div class="laudo-text">Você responderá um breve questionário sobre seu momento profissional. Ao final, nossa inteligência artificial gerará um <strong>laudo de perfil de empregabilidade</strong> personalizado, que poderemos enviar diretamente para o seu WhatsApp.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goTo(1)">Começar agora →</button>
+    </div>
+  </div>
+
+  <!-- ===== SEÇÃO 1: IDENTIFICAÇÃO ===== -->
+  <div class="section" id="sec-1">
+    <div class="section-header">
+      <div class="section-eyebrow">Etapa 1 de 6</div>
+      <div class="section-title">Identificação</div>
+      <div class="section-desc">Vamos começar conhecendo você melhor.</div>
+    </div>
+
+    <p class="required-note">Campos com <span style="color:var(--vermelho)">*</span> são obrigatórios</p>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">👤</span> Dados pessoais</div>
+
+      <div class="field">
+        <label for="nome">Nome completo <span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Seu nome completo" autocomplete="name">
+      </div>
+
+      <div class="two-col">
+        <div class="field">
+          <label for="idade">Idade <span class="req">*</span></label>
+          <input type="number" id="idade" placeholder="Ex: 22" min="14" max="80">
+        </div>
+        <div class="field">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" placeholder="Ex: Goiânia">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">WhatsApp <span class="req">*</span></label>
+        <input type="tel" id="whatsapp" placeholder="(62) 9 9999-9999" autocomplete="tel">
+        <div class="field-hint">Para envio do laudo ao final</div>
+      </div>
+
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="formacao">Curso ou área de formação</label>
+        <input type="text" id="formacao" placeholder="Ex: Administração, Direito, Técnico em Informática...">
+      </div>
+
+      <div class="field">
+        <label>Está estudando atualmente?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'estudando','sim')">
+            <input type="radio" name="estudando" value="sim"> <span class="radio-label">Sim</span>
+          </label>
+          <label class="radio-item" onclick="selRadio(this,'estudando','nao')">
+            <input type="radio" name="estudando" value="nao"> <span class="radio-label">Não</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field" id="campo-curso" style="display:none">
+        <label for="curso-periodo">Curso e período atual</label>
+        <input type="text" id="curso-periodo" placeholder="Ex: Administração – 4º semestre">
+      </div>
+    </div>
+
+    <!-- LGPD ACEITE -->
+    <div class="lgpd-box">
+      <div class="lgpd-title">🔒 Autorização de uso de dados</div>
+      <div class="lgpd-text">Conforme a LGPD (Lei 13.709/2018), você precisa autorizar o uso dos seus dados para participar do projeto.</div>
+
+      <label class="lgpd-check" id="lgpd-1-wrap">
+        <input type="checkbox" id="lgpd-dados" onchange="checkLgpd()">
+        <span class="lgpd-check-label">Autorizo o uso das minhas informações para fins de orientação profissional no âmbito do projeto Universo de Oportunidades. <strong>*</strong></span>
+      </label>
+
+      <label class="lgpd-check" id="lgpd-2-wrap" style="margin-top:8px">
+        <input type="checkbox" id="lgpd-whatsapp" onchange="checkLgpd()">
+        <span class="lgpd-check-label">Autorizo o recebimento de informações e do laudo pelo WhatsApp informado. <strong>*</strong></span>
+      </label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(0)">← Voltar</button>
+      <button class="btn btn-primary" id="btn-sec1" onclick="nextSec1()" disabled>Próximo →</button>
+    </div>
+  </div>
+
+  <!-- ===== SEÇÃO 2: MOMENTO + EXPERIÊNCIA ===== -->
+  <div class="section" id="sec-2">
+    <div class="section-header">
+      <div class="section-eyebrow">Etapa 2 de 6</div>
+      <div class="section-title">Momento Profissional</div>
+      <div class="section-desc">Conte-nos sobre sua situação atual e experiência.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">💼</span> Situação atual</div>
+      <div class="field">
+        <label>Qual alternativa representa melhor sua situação atual? <span class="req">*</span></label>
+        <div class="radio-group" id="rg-situacao">
+          <label class="radio-item" onclick="selRadio(this,'situacao','empregado')"><input type="radio" name="situacao" value="empregado"> <span class="radio-label">Estou empregado(a)</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','empregado-busca')"><input type="radio" name="situacao" value="empregado-busca"> <span class="radio-label">Estou empregado(a), mas procuro nova oportunidade</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','desempregado')"><input type="radio" name="situacao" value="desempregado"> <span class="radio-label">Estou desempregado(a) e procurando trabalho</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','primeiro-emprego')"><input type="radio" name="situacao" value="primeiro-emprego"> <span class="radio-label">Estou procurando meu primeiro emprego</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','autonomo')"><input type="radio" name="situacao" value="autonomo"> <span class="radio-label">Trabalho como autônomo(a)</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','empreendedor')"><input type="radio" name="situacao" value="empreendedor"> <span class="radio-label">Sou empreendedor(a)</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','comecando-empreender')"><input type="radio" name="situacao" value="comecando-empreender"> <span class="radio-label">Estou começando a empreender</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','temporario')"><input type="radio" name="situacao" value="temporario"> <span class="radio-label">Faço trabalhos temporários ou informais</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','transicao')"><input type="radio" name="situacao" value="transicao"> <span class="radio-label">Estou em transição de carreira</span></label>
+          <label class="radio-item" onclick="selRadio(this,'situacao','pesquisando')"><input type="radio" name="situacao" value="pesquisando"> <span class="radio-label">Estou apenas pesquisando possibilidades</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Há quanto tempo está nessa situação?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'tempo-situacao','menos3m')"><input type="radio" name="tempo-situacao" value="menos3m"> <span class="radio-label">Menos de 3 meses</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-situacao','3a6m')"><input type="radio" name="tempo-situacao" value="3a6m"> <span class="radio-label">De 3 a 6 meses</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-situacao','6ma1a')"><input type="radio" name="tempo-situacao" value="6ma1a"> <span class="radio-label">De 6 meses a 1 ano</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-situacao','mais1a')"><input type="radio" name="tempo-situacao" value="mais1a"> <span class="radio-label">Mais de 1 ano</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🏢</span> Experiência profissional</div>
+      <div class="field">
+        <label>Você já teve experiência profissional?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'tem-experiencia','sim'); document.getElementById('campos-exp').style.display='block'"><input type="radio" name="tem-experiencia" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tem-experiencia','nao'); document.getElementById('campos-exp').style.display='none'"><input type="radio" name="tem-experiencia" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div id="campos-exp" style="display:none">
+        <div class="field">
+          <label for="areas-trabalhou">Em quais áreas já trabalhou?</label>
+          <input type="text" id="areas-trabalhou" placeholder="Ex: Comércio, Administração, Saúde...">
+        </div>
+        <div class="field">
+          <label for="ultima-funcao">Última função ou atividade profissional</label>
+          <input type="text" id="ultima-funcao" placeholder="Ex: Assistente administrativo, Vendedor...">
+        </div>
+      </div>
+      <div class="field">
+        <label>Tempo de experiência profissional</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'tempo-exp','menos1a')"><input type="radio" name="tempo-exp" value="menos1a"> <span class="radio-label">Menos de 1 ano</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-exp','1a3a')"><input type="radio" name="tempo-exp" value="1a3a"> <span class="radio-label">De 1 a 3 anos</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-exp','3a5a')"><input type="radio" name="tempo-exp" value="3a5a"> <span class="radio-label">De 3 a 5 anos</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-exp','mais5a')"><input type="radio" name="tempo-exp" value="mais5a"> <span class="radio-label">Mais de 5 anos</span></label>
+          <label class="radio-item" onclick="selRadio(this,'tempo-exp','nenhum')"><input type="radio" name="tempo-exp" value="nenhum"> <span class="radio-label">Ainda não possuo experiência</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Você já realizou estágio?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'estagio','sim')"><input type="radio" name="estagio" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'estagio','nao')"><input type="radio" name="estagio" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Voluntariado, projeto acadêmico, extensão ou empresa júnior?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'voluntario','sim'); document.getElementById('campo-voluntario').style.display='block'"><input type="radio" name="voluntario" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'voluntario','nao'); document.getElementById('campo-voluntario').style.display='none'"><input type="radio" name="voluntario" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div id="campo-voluntario" class="field" style="display:none">
+        <label for="desc-voluntario">Descreva brevemente</label>
+        <textarea id="desc-voluntario" placeholder="Ex: Participei da empresa júnior de Administração por 1 ano..."></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(1)">← Voltar</button>
+      <button class="btn btn-primary" onclick="goTo(3)">Próximo →</button>
+    </div>
+  </div>
+
+  <!-- ===== SEÇÃO 3: OBJETIVO + DISPONIBILIDADE ===== -->
+  <div class="section" id="sec-3">
+    <div class="section-header">
+      <div class="section-eyebrow">Etapa 3 de 6</div>
+      <div class="section-title">Objetivo e Disponibilidade</div>
+      <div class="section-desc">O que você busca e como está disponível.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🎯</span> Objetivo profissional</div>
+      <div class="field">
+        <label>Principal objetivo neste momento <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'objetivo','primeiro-emprego')"><input type="radio" name="objetivo" value="primeiro-emprego"> <span class="radio-label">Conseguir meu primeiro emprego</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','novo-emprego')"><input type="radio" name="objetivo" value="novo-emprego"> <span class="radio-label">Conseguir um novo emprego</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','estagio')"><input type="radio" name="objetivo" value="estagio"> <span class="radio-label">Conseguir estágio</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','melhorar')"><input type="radio" name="objetivo" value="melhorar"> <span class="radio-label">Melhorar minha posição profissional</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','mudar-area')"><input type="radio" name="objetivo" value="mudar-area"> <span class="radio-label">Mudar de área</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','autonomo')"><input type="radio" name="objetivo" value="autonomo"> <span class="radio-label">Trabalhar como autônomo(a)</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','abrir-negocio')"><input type="radio" name="objetivo" value="abrir-negocio"> <span class="radio-label">Abrir um negócio</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','desenvolver-negocio')"><input type="radio" name="objetivo" value="desenvolver-negocio"> <span class="radio-label">Desenvolver meu negócio atual</span></label>
+          <label class="radio-item" onclick="selRadio(this,'objetivo','nao-sei')"><input type="radio" name="objetivo" value="nao-sei"> <span class="radio-label">Ainda não sei qual caminho seguir</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="area-desejada">Área ou função que gostaria de exercer</label>
+        <input type="text" id="area-desejada" placeholder="Ex: Marketing, Recursos Humanos, Tecnologia...">
+      </div>
+      <div class="field">
+        <label for="empresa-setor">Empresa, setor ou tipo de negócio de interesse</label>
+        <input type="text" id="empresa-setor" placeholder="Ex: Empresas de saúde, startups, comércio...">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">⏰</span> Disponibilidade</div>
+      <div class="field">
+        <label>Tipo de oportunidade que busca</label>
+        <div class="check-group" id="tipo-oportunidade">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="formal"> <span class="check-label">Emprego formal</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="estagio"> <span class="check-label">Estágio</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="jovem-aprendiz"> <span class="check-label">Jovem Aprendiz</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="temporario"> <span class="check-label">Trabalho temporário</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="autonomo"> <span class="check-label">Trabalho autônomo</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="freelancer"> <span class="check-label">Freelancer</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="empreendedorismo"> <span class="check-label">Empreendedorismo</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="qualquer"> <span class="check-label">Qualquer oportunidade compatível</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Modalidade de trabalho</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'modalidade','presencial')"><input type="radio" name="modalidade" value="presencial"> <span class="radio-label">Presencial</span></label>
+          <label class="radio-item" onclick="selRadio(this,'modalidade','remoto')"><input type="radio" name="modalidade" value="remoto"> <span class="radio-label">Remoto</span></label>
+          <label class="radio-item" onclick="selRadio(this,'modalidade','hibrido')"><input type="radio" name="modalidade" value="hibrido"> <span class="radio-label">Híbrido</span></label>
+          <label class="radio-item" onclick="selRadio(this,'modalidade','todas')"><input type="radio" name="modalidade" value="todas"> <span class="radio-label">Todas as modalidades</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Período de disponibilidade</label>
+        <div class="check-group" id="periodo-disp">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="manha"> <span class="check-label">Manhã</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="tarde"> <span class="check-label">Tarde</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="noite"> <span class="check-label">Noite</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="comercial"> <span class="check-label">Horário comercial</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="integral"> <span class="check-label">Disponibilidade integral</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="fds"> <span class="check-label">Finais de semana</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(2)">← Voltar</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Próximo →</button>
+    </div>
+  </div>
+
+  <!-- ===== SEÇÃO 4: CURRÍCULO + COMPETÊNCIAS ===== -->
+  <div class="section" id="sec-4">
+    <div class="section-header">
+      <div class="section-eyebrow">Etapa 4 de 6</div>
+      <div class="section-title">Currículo e Competências</div>
+      <div class="section-desc">Como você se apresenta profissionalmente.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">📄</span> Currículo e apresentação</div>
+      <div class="field">
+        <label>Você possui currículo atualizado?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'curriculo','sim')"><input type="radio" name="curriculo" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'curriculo','nao')"><input type="radio" name="curriculo" value="nao"> <span class="radio-label">Não</span></label>
+          <label class="radio-item" onclick="selRadio(this,'curriculo','desatualizado')"><input type="radio" name="curriculo" value="desatualizado"> <span class="radio-label">Tenho, mas precisa ser atualizado</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Seu currículo apresenta claramente seu objetivo?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'curriculo-obj','sim')"><input type="radio" name="curriculo-obj" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'curriculo-obj','nao')"><input type="radio" name="curriculo-obj" value="nao"> <span class="radio-label">Não</span></label>
+          <label class="radio-item" onclick="selRadio(this,'curriculo-obj','nao-sei')"><input type="radio" name="curriculo-obj" value="nao-sei"> <span class="radio-label">Não sei avaliar</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Perfil no LinkedIn</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'linkedin','atualizado')"><input type="radio" name="linkedin" value="atualizado"> <span class="radio-label">Sim, atualizado</span></label>
+          <label class="radio-item" onclick="selRadio(this,'linkedin','desatualizado')"><input type="radio" name="linkedin" value="desatualizado"> <span class="radio-label">Sim, mas desatualizado</span></label>
+          <label class="radio-item" onclick="selRadio(this,'linkedin','nao')"><input type="radio" name="linkedin" value="nao"> <span class="radio-label">Não possuo</span></label>
+          <label class="radio-item" onclick="selRadio(this,'linkedin','nao-conheco')"><input type="radio" name="linkedin" value="nao-conheco"> <span class="radio-label">Não conheço ou não sei utilizar</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Sabe apresentar suas competências em entrevista?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'competencias-entrevista','sim')"><input type="radio" name="competencias-entrevista" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'competencias-entrevista','mais-ou-menos')"><input type="radio" name="competencias-entrevista" value="mais-ou-menos"> <span class="radio-label">Mais ou menos</span></label>
+          <label class="radio-item" onclick="selRadio(this,'competencias-entrevista','nao')"><input type="radio" name="competencias-entrevista" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Preparação para entrevista (1 = pouco preparado, 5 = muito preparado)</label>
+        <div class="scale-row" id="scale-entrevista">
+          <button class="scale-btn" onclick="selScale(this,'scale-entrevista',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-entrevista',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-entrevista',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-entrevista',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-entrevista',5)">5</button>
+        </div>
+        <div class="scale-labels"><span class="scale-label">Pouco preparado</span><span class="scale-label">Muito preparado</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">⭐</span> Competências (marque até 5)</div>
+      <div class="check-grid" id="competencias-grid">
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Comunicação"> <span class="check-label">Comunicação</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Organização"> <span class="check-label">Organização</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Liderança"> <span class="check-label">Liderança</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Trabalho em equipe"> <span class="check-label">Trabalho em equipe</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Criatividade"> <span class="check-label">Criatividade</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Iniciativa"> <span class="check-label">Iniciativa</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Proatividade"> <span class="check-label">Proatividade</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Flexibilidade"> <span class="check-label">Flexibilidade</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Aprendizado contínuo"> <span class="check-label">Cap. de aprender</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Resolução de problemas"> <span class="check-label">Resolução de problemas</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Negociação"> <span class="check-label">Negociação</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Atendimento ao público"> <span class="check-label">Atendimento ao público</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Planejamento"> <span class="check-label">Planejamento</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Tecnologia"> <span class="check-label">Tecnologia</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Vendas"> <span class="check-label">Vendas</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Gestão"> <span class="check-label">Gestão</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Empreendedorismo"> <span class="check-label">Empreendedorismo</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Inteligência emocional"> <span class="check-label">Inteligência emocional</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Responsabilidade"> <span class="check-label">Responsabilidade</span></label>
+        <label class="check-item" onclick="toggleCheck(this,'competencias-grid',5)"><input type="checkbox" value="Pontualidade"> <span class="check-label">Pontualidade</span></label>
+      </div>
+      <div class="field" style="margin-top:14px">
+        <label for="diferencial">Seu principal diferencial profissional</label>
+        <input type="text" id="diferencial" placeholder="O que te destaca dos demais?">
+      </div>
+      <div class="field">
+        <label for="a-desenvolver">Competência que ainda precisa desenvolver</label>
+        <input type="text" id="a-desenvolver" placeholder="Onde você quer melhorar?">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Voltar</button>
+      <button class="btn btn-primary" onclick="goTo(5)">Próximo →</button>
+    </div>
+  </div>
+
+  <!-- ===== SEÇÃO 5: TECNOLOGIA + EMPREENDEDORISMO + AUTOPERCEPÇÃO ===== -->
+  <div class="section" id="sec-5">
+    <div class="section-header">
+      <div class="section-eyebrow">Etapa 5 de 6</div>
+      <div class="section-title">Qualificação e Autopercepção</div>
+      <div class="section-desc">Tecnologia, empreendedorismo e como você se avalia.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">💻</span> Tecnologia</div>
+      <div class="field">
+        <label>Domínio de ferramentas digitais</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'digital','muito-baixo')"><input type="radio" name="digital" value="muito-baixo"> <span class="radio-label">Muito baixo</span></label>
+          <label class="radio-item" onclick="selRadio(this,'digital','baixo')"><input type="radio" name="digital" value="baixo"> <span class="radio-label">Baixo</span></label>
+          <label class="radio-item" onclick="selRadio(this,'digital','intermediario')"><input type="radio" name="digital" value="intermediario"> <span class="radio-label">Intermediário</span></label>
+          <label class="radio-item" onclick="selRadio(this,'digital','bom')"><input type="radio" name="digital" value="bom"> <span class="radio-label">Bom</span></label>
+          <label class="radio-item" onclick="selRadio(this,'digital','muito-bom')"><input type="radio" name="digital" value="muito-bom"> <span class="radio-label">Muito bom</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Ferramentas que utiliza</label>
+        <div class="check-grid" id="ferramentas-grid">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Word"> <span class="check-label">Word</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Excel"> <span class="check-label">Excel</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="PowerPoint"> <span class="check-label">PowerPoint</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Google Workspace"> <span class="check-label">Google Workspace</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Canva"> <span class="check-label">Canva</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Redes sociais profissionais"> <span class="check-label">Redes sociais prof.</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Sistemas de gestão"> <span class="check-label">Sistemas de gestão</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Inteligência Artificial"> <span class="check-label">Inteligência Artificial</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Fez curso de qualificação nos últimos 2 anos?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'curso-recente','sim'); document.getElementById('campo-cursos').style.display='block'"><input type="radio" name="curso-recente" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'curso-recente','nao'); document.getElementById('campo-cursos').style.display='none'"><input type="radio" name="curso-recente" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div class="field" id="campo-cursos" style="display:none">
+        <label for="quais-cursos">Quais cursos realizou?</label>
+        <input type="text" id="quais-cursos" placeholder="Ex: Excel avançado, Marketing Digital, NR-10...">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🚀</span> Empreendedorismo</div>
+      <div class="field">
+        <label>Já vendeu produto ou serviço por conta própria?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'vendeu','sim')"><input type="radio" name="vendeu" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'vendeu','nao')"><input type="radio" name="vendeu" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Já teve ou tem algum negócio?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'negocio','sim-atual')"><input type="radio" name="negocio" value="sim-atual"> <span class="radio-label">Sim, atualmente</span></label>
+          <label class="radio-item" onclick="selRadio(this,'negocio','ja-tive')"><input type="radio" name="negocio" value="ja-tive"> <span class="radio-label">Já tive</span></label>
+          <label class="radio-item" onclick="selRadio(this,'negocio','planejando')"><input type="radio" name="negocio" value="planejando"> <span class="radio-label">Estou planejando começar</span></label>
+          <label class="radio-item" onclick="selRadio(this,'negocio','nao')"><input type="radio" name="negocio" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Possui habilidade que poderia virar fonte de renda?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'habilidade-renda','sim'); document.getElementById('campo-habilidade').style.display='block'"><input type="radio" name="habilidade-renda" value="sim"> <span class="radio-label">Sim</span></label>
+          <label class="radio-item" onclick="selRadio(this,'habilidade-renda','talvez'); document.getElementById('campo-habilidade').style.display='block'"><input type="radio" name="habilidade-renda" value="talvez"> <span class="radio-label">Talvez</span></label>
+          <label class="radio-item" onclick="selRadio(this,'habilidade-renda','nao'); document.getElementById('campo-habilidade').style.display='none'"><input type="radio" name="habilidade-renda" value="nao"> <span class="radio-label">Não</span></label>
+        </div>
+      </div>
+      <div class="field" id="campo-habilidade" style="display:none">
+        <label for="qual-habilidade">Qual habilidade?</label>
+        <input type="text" id="qual-habilidade" placeholder="Ex: Costura, fotografia, programação...">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🧭</span> Autopercepção – Como você se avalia? (1 a 5)</div>
+
+      <div id="scale-clareza" class="scale-group">
+        <div class="scale-title">Clareza sobre o que deseja profissionalmente</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-clareza',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-clareza',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-clareza',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-clareza',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-clareza',5)">5</button>
+        </div>
+      </div>
+
+      <div id="scale-curriculo" class="scale-group">
+        <div class="scale-title">Qualidade do seu currículo</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-curriculo',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-curriculo',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-curriculo',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-curriculo',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-curriculo',5)">5</button>
+        </div>
+      </div>
+
+      <div id="scale-prep-entrevista" class="scale-group">
+        <div class="scale-title">Preparação para entrevistas</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-prep-entrevista',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-prep-entrevista',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-prep-entrevista',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-prep-entrevista',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-prep-entrevista',5)">5</button>
+        </div>
+      </div>
+
+      <div id="scale-qualif" class="scale-group">
+        <div class="scale-title">Qualificação profissional</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-qualif',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-qualif',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-qualif',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-qualif',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-qualif',5)">5</button>
+        </div>
+      </div>
+
+      <div id="scale-oportunidades" class="scale-group">
+        <div class="scale-title">Capacidade de procurar oportunidades</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-oportunidades',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-oportunidades',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-oportunidades',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-oportunidades',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-oportunidades',5)">5</button>
+        </div>
+      </div>
+
+      <div id="scale-rede" class="scale-group">
+        <div class="scale-title">Rede de contatos profissionais</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-rede',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-rede',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-rede',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-rede',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-rede',5)">5</button>
+        </div>
+      </div>
+
+      <div id="scale-renda" class="scale-group">
+        <div class="scale-title">Capacidade de gerar renda com suas habilidades</div>
+        <div class="scale-row">
+          <button class="scale-btn" onclick="selScale(this,'scale-renda',1)">1</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-renda',2)">2</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-renda',3)">3</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-renda',4)">4</button>
+          <button class="scale-btn" onclick="selScale(this,'scale-renda',5)">5</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(4)">← Voltar</button>
+      <button class="btn btn-primary" onclick="goTo(6)">Próximo →</button>
+    </div>
+  </div>
+
+  <!-- ===== SEÇÃO 6: DIFICULDADES + NECESSIDADES + FINALIZAÇÃO ===== -->
+  <div class="section" id="sec-6">
+    <div class="section-header">
+      <div class="section-eyebrow">Etapa 6 de 6 – Última etapa!</div>
+      <div class="section-title">Dificuldades e Necessidades</div>
+      <div class="section-desc">O que você precisa neste momento.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🚧</span> Principal dificuldade</div>
+      <div class="field">
+        <label>Qual é sua maior dificuldade profissional hoje?</label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','falta-exp')"><input type="radio" name="dificuldade" value="falta-exp"> <span class="radio-label">Falta de experiência</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','falta-qualif')"><input type="radio" name="dificuldade" value="falta-qualif"> <span class="radio-label">Falta de qualificação</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','onde-procurar')"><input type="radio" name="dificuldade" value="onde-procurar"> <span class="radio-label">Não sei onde procurar oportunidades</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','curriculo')"><input type="radio" name="dificuldade" value="curriculo"> <span class="radio-label">Currículo inadequado</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','entrevistas')"><input type="radio" name="dificuldade" value="entrevistas"> <span class="radio-label">Dificuldade em entrevistas</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','contatos')"><input type="radio" name="dificuldade" value="contatos"> <span class="radio-label">Falta de contatos profissionais</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','qual-area')"><input type="radio" name="dificuldade" value="qual-area"> <span class="radio-label">Não sei qual área seguir</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','poucas-vagas')"><input type="radio" name="dificuldade" value="poucas-vagas"> <span class="radio-label">Poucas oportunidades na minha área</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','empreender')"><input type="radio" name="dificuldade" value="empreender"> <span class="radio-label">Dificuldade para empreender</span></label>
+          <label class="radio-item" onclick="selRadio(this,'dificuldade','inseguranca')"><input type="radio" name="dificuldade" value="inseguranca"> <span class="radio-label">Falta de confiança ou insegurança</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🤝</span> O que você precisa</div>
+      <div class="field">
+        <label>Gostaria de receber apoio em quais áreas?</label>
+        <div class="check-grid" id="apoio-grid">
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Currículo"> <span class="check-label">Elaboração de currículo</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Entrevista"> <span class="check-label">Prep. para entrevista</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Orientação profissional"> <span class="check-label">Orientação profissional</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Planejamento de carreira"> <span class="check-label">Planejamento de carreira</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Busca de vagas"> <span class="check-label">Busca de vagas</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="LinkedIn"> <span class="check-label">LinkedIn</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Qualificação profissional"> <span class="check-label">Qualificação profissional</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Empreendedorismo"> <span class="check-label">Empreendedorismo</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Networking"> <span class="check-label">Networking</span></label>
+          <label class="check-item" onclick="toggleCheck(this)"><input type="checkbox" value="Desenvolvimento de competências"> <span class="check-label">Competências</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🌐</span> Universo de Oportunidades</div>
+      <div class="field">
+        <label>Quer participar do grupo Universo de Oportunidades no WhatsApp?</label>
+        <div class="laudo-text" style="margin-bottom:10px">Grupo com vagas, estágios, cursos, eventos e oportunidades de empreendedorismo.</div>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selRadio(this,'grupo-whats','sim')"><input type="radio" name="grupo-whats" value="sim"> <span class="radio-label">Sim, quero participar!</span></label>
+          <label class="radio-item" onclick="selRadio(this,'grupo-whats','nao')"><input type="radio" name="grupo-whats" value="nao"> <span class="radio-label">Não por enquanto</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goTo(5)">← Voltar</button>
+      <button class="btn btn-primary" onclick="gerarLaudo()">✨ Gerar meu laudo</button>
+    </div>
+  </div>
+
+  <!-- ===== LAUDO ===== -->
+  <div id="sec-laudo" style="display:none">
+    <div class="section-header">
+      <div class="section-eyebrow">Resultado</div>
+      <div class="section-title">Seu Laudo de Empregabilidade</div>
+      <div class="section-desc">Análise personalizada gerada com base no seu perfil.</div>
+    </div>
+
+    <div id="laudo-box">
+      <div class="laudo-header">
+        <div class="laudo-logo">🌟 Universo de Oportunidades</div>
+        <div class="laudo-subtitulo">Centro Universo Goiânia · Laudo de Perfil de Empregabilidade</div>
+      </div>
+      <div class="laudo-body">
+        <div class="laudo-nome" id="laudo-nome"></div>
+        <div class="laudo-meta" id="laudo-meta"></div>
+
+        <div class="laudo-section-title">📊 Autopercepção Profissional</div>
+        <div id="laudo-scores"></div>
+
+        <div class="laudo-section-title">💡 Análise do Perfil</div>
+        <div id="laudo-analise" class="laudo-text">Gerando análise...</div>
+
+        <div class="laudo-section-title">⭐ Competências Identificadas</div>
+        <div class="laudo-chips" id="laudo-competencias"></div>
+
+        <div class="laudo-section-title">🎯 Orientação e Próximos Passos</div>
+        <div id="laudo-orientacao" class="laudo-text">Gerando orientações...</div>
+
+        <div class="laudo-section-title">📌 Encaminhamentos Recomendados</div>
+        <div id="laudo-encaminhamentos" class="laudo-text">Gerando recomendações...</div>
+
+        <div class="laudo-rodape">
+          <strong>Projeto Universo de Oportunidades</strong><br>
+          Centro Universitário UNIVERSO Goiânia<br>
+          Este laudo é uma orientação inicial. Para acompanhamento personalizado, entre em contato com nossa equipe.
+        </div>
+      </div>
+    </div>
+
+    <div class="laudo-actions">
+      <button class="btn btn-whatsapp btn-full" onclick="compartilharWhatsApp()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Enviar laudo pelo WhatsApp
+      </button>
+      <button class="btn btn-secondary btn-full" onclick="reiniciar()">🔄 Novo questionário</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore-compat.min.js"></script>
+<script>
+// ===== FIREBASE =====
+const firebaseConfig = {
+  apiKey: "AIzaSyBaJDEuOub7IBDVQMakk2rmyG6e8xRhP2E",
+  authDomain: "anamnese-dralucia.firebaseapp.com",
+  projectId: "anamnese-dralucia",
+  storageBucket: "anamnese-dralucia.firebasestorage.app",
+  messagingSenderId: "873511256571",
+  appId: "1:873511256571:web:306e27d16f82bd62fe4b5e"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function salvarNoFirestore(data, laudo) {
+  try {
+    await db.collection('universo-oportunidades').add({
+      // ── IDENTIFICADOR DO APP ──────────────────────────
+      origem: 'universo-oportunidades',
+      projeto: 'Universo de Oportunidades',
+      instituicao: 'Centro Universitário UNIVERSO Goiânia',
+      curso: 'Administração',
+      // ── DATA/HORA ─────────────────────────────────────
+      criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+      dataFormatada: new Date().toLocaleDateString('pt-BR'),
+      // ── DADOS DO PARTICIPANTE ─────────────────────────
+      ...data,
+      // ── LAUDO GERADO ─────────────────────────────────
+      laudoTexto: laudo || ''
+    });
+    showToast('✅ Dados salvos com sucesso!', 'success');
+  } catch (e) {
+    console.error('Erro ao salvar:', e);
+    showToast('⚠️ Não foi possível salvar os dados.', 'error');
+  }
+}
+</script>
+
+<script>
+// ===== STATE =====
+let currentStep = 0;
+const scales = {};
+const stepLabels = ['Bem-vindo', 'Identificação', 'Momento', 'Objetivo', 'Competências', 'Qualificação', 'Finalização'];
+let laudoTexto = '';
+
+// ===== NAVIGATION =====
+function goTo(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById('sec-' + n);
+  if (sec) {
+    sec.classList.add('active');
+    currentStep = n;
+    updateProgress(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function updateProgress(step) {
+  const label = document.getElementById('progress-label');
+  if (label) label.textContent = stepLabels[step] || '';
+  document.querySelectorAll('.progress-step').forEach((el, i) => {
+    el.classList.remove('done', 'active');
+    if (i < step) el.classList.add('done');
+    else if (i === step) el.classList.add('active');
+  });
+}
+
+// ===== RADIO =====
+function selRadio(el, name, value) {
+  document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+    r.closest('.radio-item').classList.remove('selected');
+  });
+  el.classList.add('selected');
+
+  // Side effects
+  if (name === 'estudando') {
+    document.getElementById('campo-curso').style.display = value === 'sim' ? 'block' : 'none';
+  }
+  checkLgpd();
+}
+
+// ===== CHECKBOX =====
+function toggleCheck(el, groupId, maxSel) {
+  const cb = el.querySelector('input[type="checkbox"]');
+  if (maxSel) {
+    const group = document.getElementById(groupId);
+    const checked = group ? group.querySelectorAll('input:checked').length : 0;
+    if (!cb.checked && checked >= maxSel) {
+      showToast('Marque no máximo ' + maxSel + ' competências', 'error');
+      return;
+    }
+  }
+  cb.checked = !cb.checked;
+  el.classList.toggle('selected', cb.checked);
+}
+
+// ===== SCALE =====
+function selScale(btn, groupId, val) {
+  const group = document.getElementById(groupId);
+  group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  scales[groupId] = val;
+}
+
+// ===== LGPD CHECK =====
+function checkLgpd() {
+  const lgpd1 = document.getElementById('lgpd-dados');
+  const lgpd2 = document.getElementById('lgpd-whatsapp');
+  const nome = document.getElementById('nome').value.trim();
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  const btn = document.getElementById('btn-sec1');
+  if (btn) btn.disabled = !(lgpd1?.checked && lgpd2?.checked && nome && whatsapp);
+}
+
+// Watch nome/whatsapp changes
+document.getElementById('nome').addEventListener('input', checkLgpd);
+document.getElementById('whatsapp').addEventListener('input', checkLgpd);
+
+function nextSec1() {
+  const nome = document.getElementById('nome').value.trim();
+  const whatsapp = document.getElementById('whatsapp').value.trim();
+  if (!nome) { showToast('Informe seu nome completo', 'error'); return; }
+  if (!whatsapp) { showToast('Informe seu WhatsApp', 'error'); return; }
+  goTo(2);
+}
+
+// ===== COLLECT DATA =====
+function collectData() {
+  const getRadio = (name) => {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : '';
+  };
+  const getChecks = (containerId) => {
+    const container = document.getElementById(containerId);
+    if (!container) return [];
+    return Array.from(container.querySelectorAll('input:checked')).map(c => c.value);
+  };
+
+  return {
+    nome: document.getElementById('nome').value.trim(),
+    idade: document.getElementById('idade').value,
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    cidade: document.getElementById('cidade').value.trim(),
+    formacao: document.getElementById('formacao').value.trim(),
+    estudando: getRadio('estudando'),
+    cursoPeriodo: document.getElementById('curso-periodo').value.trim(),
+    situacaoAtual: getRadio('situacao'),
+    tempoSituacao: getRadio('tempo-situacao'),
+    temExperiencia: getRadio('tem-experiencia'),
+    areasTrabalhou: document.getElementById('areas-trabalhou').value.trim(),
+    ultimaFuncao: document.getElementById('ultima-funcao').value.trim(),
+    tempoExp: getRadio('tempo-exp'),
+    fezEstagio: getRadio('estagio'),
+    voluntario: getRadio('voluntario'),
+    descVoluntario: document.getElementById('desc-voluntario').value.trim(),
+    objetivo: getRadio('objetivo'),
+    areaDesejada: document.getElementById('area-desejada').value.trim(),
+    empresaSetor: document.getElementById('empresa-setor').value.trim(),
+    tipoOportunidade: getChecks('tipo-oportunidade'),
+    modalidade: getRadio('modalidade'),
+    curriculo: getRadio('curriculo'),
+    linkedIn: getRadio('linkedin'),
+    prepEntrevista: scales['scale-entrevista'] || 0,
+    competencias: getChecks('competencias-grid'),
+    diferencial: document.getElementById('diferencial').value.trim(),
+    aDesenvolver: document.getElementById('a-desenvolver').value.trim(),
+    dominioDigital: getRadio('digital'),
+    ferramentas: getChecks('ferramentas-grid'),
+    cursoRecente: getRadio('curso-recente'),
+    quaisCursos: document.getElementById('quais-cursos').value.trim(),
+    vendeu: getRadio('vendeu'),
+    negocio: getRadio('negocio'),
+    habilidadeRenda: getRadio('habilidade-renda'),
+    qualHabilidade: document.getElementById('qual-habilidade').value.trim(),
+    scales: {
+      clareza: scales['scale-clareza'] || 0,
+      curriculo: scales['scale-curriculo'] || 0,
+      prepEntrevista: scales['scale-prep-entrevista'] || 0,
+      qualificacao: scales['scale-qualif'] || 0,
+      buscarOportunidades: scales['scale-oportunidades'] || 0,
+      redeContatos: scales['scale-rede'] || 0,
+      gerarRenda: scales['scale-renda'] || 0
+    },
+    dificuldade: getRadio('dificuldade'),
+    apoioDesejado: getChecks('apoio-grid'),
+    grupoWhats: getRadio('grupo-whats')
+  };
+}
+
+// ===== GERAR LAUDO =====
+async function gerarLaudo() {
+  const data = collectData();
+  // Salva imediatamente ao iniciar (laudo ainda vazio, será atualizado depois)
+  salvarNoFirestore(data, '');
+
+  // Loading
+  document.getElementById('loading').classList.add('active');
+
+  // Show laudo section
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-laudo').style.display = 'block';
+  updateProgress(7);
+
+  // Fill static info
+  document.getElementById('laudo-nome').textContent = data.nome;
+  document.getElementById('laudo-meta').textContent =
+    `${data.idade ? data.idade + ' anos · ' : ''}${data.cidade || 'Goiânia'} · ${data.formacao || 'Formação não informada'} · ${new Date().toLocaleDateString('pt-BR')}`;
+
+  // Chips de competências
+  const compContainer = document.getElementById('laudo-competencias');
+  compContainer.innerHTML = '';
+  (data.competencias || []).forEach(c => {
+    const chip = document.createElement('span');
+    chip.className = 'laudo-chip';
+    chip.textContent = c;
+    compContainer.appendChild(chip);
+  });
+
+  // Scores
+  const scoresHtml = Object.entries({
+    'Clareza profissional': data.scales.clareza,
+    'Qualidade do currículo': data.scales.curriculo,
+    'Prep. entrevistas': data.scales.prepEntrevista,
+    'Qualificação': data.scales.qualificacao,
+    'Busca de oportunidades': data.scales.buscarOportunidades,
+    'Rede de contatos': data.scales.redeContatos,
+    'Cap. gerar renda': data.scales.gerarRenda
+  }).map(([label, val]) => {
+    const pct = (val / 5 * 100) || 0;
+    const color = val >= 4 ? '#27AE60' : val >= 3 ? '#F39C12' : '#E74C3C';
+    return `<div class="laudo-score">
+      <span class="laudo-score-label">${label}</span>
+      <div class="laudo-score-bar"><div class="laudo-score-fill" style="width:${pct}%;background:${color}"></div></div>
+      <span class="laudo-score-num">${val || '–'}/5</span>
+    </div>`;
+  }).join('');
+  document.getElementById('laudo-scores').innerHTML = scoresHtml;
+
+  // Gerar com IA
+  try {
+    const sample = await claude.use('sample');
+    if (!sample) throw new Error('sample unavailable');
+
+    const prompt = `Você é um orientador de carreira do projeto "Universo de Oportunidades" do Centro Universitário UNIVERSO Goiânia.
+
+Com base nas respostas abaixo, gere um laudo de empregabilidade PERSONALIZADO e ACOLHEDOR em português brasileiro.
+
+DADOS DO PARTICIPANTE:
+- Nome: ${data.nome}
+- Idade: ${data.idade} anos
+- Cidade: ${data.cidade}
+- Formação: ${data.formacao}
+- Estudando: ${data.estudando === 'sim' ? 'Sim – ' + data.cursoPeriodo : 'Não'}
+- Situação atual: ${data.situacaoAtual}
+- Tempo nessa situação: ${data.tempoSituacao}
+- Experiência profissional: ${data.temExperiencia === 'sim' ? 'Sim – ' + data.ultimaFuncao + ' (' + data.tempoExp + ')' : 'Não tem experiência'}
+- Objetivo principal: ${data.objetivo}
+- Área desejada: ${data.areaDesejada}
+- Competências marcadas: ${data.competencias.join(', ')}
+- Diferencial: ${data.diferencial}
+- A desenvolver: ${data.aDesenvolver}
+- Currículo: ${data.curriculo}
+- LinkedIn: ${data.linkedIn}
+- Domínio digital: ${data.dominioDigital}
+- Ferramentas: ${data.ferramentas.join(', ')}
+- Vendeu produto/serviço: ${data.vendeu}
+- Negócio: ${data.negocio}
+- Habilidade que pode gerar renda: ${data.qualHabilidade || 'não informada'}
+- Autopercepção (1-5): Clareza=${data.scales.clareza}, Currículo=${data.scales.curriculo}, Entrevistas=${data.scales.prepEntrevista}, Qualificação=${data.scales.qualificacao}, Oportunidades=${data.scales.buscarOportunidades}, Rede=${data.scales.redeContatos}, Renda=${data.scales.gerarRenda}
+- Principal dificuldade: ${data.dificuldade}
+- Apoio desejado: ${data.apoioDesejado.join(', ')}
+
+INSTRUÇÕES:
+Escreva 3 seções separadas por "---ANALISE---", "---ORIENTACAO---", "---ENCAMINHAMENTOS---":
+
+1. ANÁLISE DO PERFIL (3-4 parágrafos): Descreva o perfil identificado (empregabilidade, primeiro emprego, empreendedorismo etc), pontos fortes, contexto profissional. Mencione o nome da pessoa. Seja acolhedor e motivador.
+
+2. ORIENTAÇÃO E PRÓXIMOS PASSOS (lista de 4-5 ações concretas): Dicas práticas e específicas para a situação desta pessoa. Considere as dificuldades e objetivos.
+
+3. ENCAMINHAMENTOS RECOMENDADOS (2-3 parágrafos): Quais serviços/recursos do Universo de Oportunidades são mais indicados. Se a pessoa quer participar do grupo WhatsApp, reforce isso. Encerre com mensagem motivacional personalizada.
+
+Escreva de forma humana, calorosa e profissional. NÃO use markdown (asteriscos, hashtags). Use linguagem acessível.`;
+
+    let analise = '', orientacao = '', encaminhamentos = '';
+    let buffer = '';
+
+    document.getElementById('laudo-analise').textContent = '';
+    document.getElementById('laudo-orientacao').textContent = '';
+    document.getElementById('laudo-encaminhamentos').textContent = '';
+    document.getElementById('loading').classList.remove('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    await sample(prompt, {
+      modelTier: 'default',
+      onText({ text }) {
+        // Parse sections
+        if (text.includes('---ANALISE---')) {
+          const parts = text.split('---ANALISE---');
+          const rest = parts[1] || '';
+          if (rest.includes('---ORIENTACAO---')) {
+            const [a, rest2] = rest.split('---ORIENTACAO---');
+            analise = a.trim();
+            if (rest2.includes('---ENCAMINHAMENTOS---')) {
+              const [o, e] = rest2.split('---ENCAMINHAMENTOS---');
+              orientacao = o.trim();
+              encaminhamentos = e.trim();
+            } else {
+              orientacao = rest2.trim();
+            }
+          } else {
+            analise = rest.trim();
+          }
+        }
+        document.getElementById('laudo-analise').textContent = analise || text.split('---')[0];
+        document.getElementById('laudo-orientacao').textContent = orientacao;
+        document.getElementById('laudo-encaminhamentos').textContent = encaminhamentos;
+        laudoTexto = text;
+      }
+    });
+
+  } catch (e) {
+    document.getElementById('loading').classList.remove('active');
+    // Fallback: laudo estático
+    const perfil = detectarPerfil(collectData());
+    document.getElementById('laudo-analise').textContent = perfil.analise;
+    document.getElementById('laudo-orientacao').textContent = perfil.orientacao;
+    document.getElementById('laudo-encaminhamentos').textContent = perfil.encaminhamentos;
+    laudoTexto = perfil.analise + '\n\n' + perfil.orientacao + '\n\n' + perfil.encaminhamentos;
+  }
+}
+
+function detectarPerfil(data) {
+  const nome = data.nome.split(' ')[0];
+  const obj = data.objetivo || '';
+  let perfil = 'Empregabilidade';
+  if (obj.includes('primeiro')) perfil = 'Primeiro Emprego';
+  else if (obj.includes('estagio')) perfil = 'Estágio';
+  else if (obj.includes('negocio') || obj.includes('autonomo') || data.negocio === 'sim-atual') perfil = 'Empreendedorismo';
+  else if (obj.includes('mudar')) perfil = 'Transição de Carreira';
+
+  const competencias = data.competencias.join(', ') || 'diversas competências';
+
+  return {
+    analise: `${nome}, com base no seu perfil identificamos que você está em um momento de "${perfil}". Suas principais competências são: ${competencias}. Você demonstra potencial e determinação para alcançar seus objetivos profissionais.\n\nSeu perfil indica uma pessoa que está buscando ativamente novas oportunidades, o que é um ótimo sinal. As competências que você destacou são muito valorizadas pelo mercado de trabalho atual.`,
+    orientacao: `1. Atualize seu currículo focando nas competências identificadas: ${competencias}.\n2. Fortaleça seu perfil no LinkedIn com foto profissional e objetivo claro.\n3. Participe de eventos e cursos na sua área de interesse.\n4. Expanda sua rede de contatos profissionais.\n5. Pratique para entrevistas, focando em exemplos concretos das suas experiências.`,
+    encaminhamentos: `Recomendamos que você participe das ações do projeto Universo de Oportunidades, especialmente: ${(data.apoioDesejado.slice(0, 3)).join(', ') || 'orientação profissional e busca de vagas'}.\n\n${data.grupoWhats === 'sim' ? 'Você será adicionado(a) ao grupo WhatsApp Universo de Oportunidades, onde receberá vagas e oportunidades compatíveis com o seu perfil.' : 'Fique de olho nas ações do projeto e volte sempre que precisar de orientação.'}\n\n${nome}, você tem tudo para conquistar seus objetivos! Continue firme na sua jornada. 🌟`
+  };
+}
+
+// ===== WHATSAPP =====
+function compartilharWhatsApp() {
+  const data = collectData();
+  const nome = data.nome;
+  const whatsapp = data.whatsapp.replace(/\D/g, '');
+  const analise = document.getElementById('laudo-analise').textContent;
+  const orientacao = document.getElementById('laudo-orientacao').textContent;
+  const encaminhamentos = document.getElementById('laudo-encaminhamentos').textContent;
+
+  const msg = `🌟 *UNIVERSO DE OPORTUNIDADES*\n*Centro Universo Goiânia*\n\n📋 *Laudo de Empregabilidade*\n👤 *${nome}*\n📅 ${new Date().toLocaleDateString('pt-BR')}\n\n---\n💡 *ANÁLISE DO PERFIL*\n${analise}\n\n---\n🎯 *ORIENTAÇÕES*\n${orientacao}\n\n---\n📌 *ENCAMINHAMENTOS*\n${encaminhamentos}\n\n---\n_Projeto Universo de Oportunidades - Centro Universitário UNIVERSO Goiânia_`;
+
+  const encoded = encodeURIComponent(msg);
+  const num = whatsapp.startsWith('55') ? whatsapp : '55' + whatsapp;
+  const url = `https://wa.me/${num}?text=${encoded}`;
+  // Salva laudo completo no Firestore ao compartilhar
+  salvarNoFirestore(collectData(), msg);
+
+  window.open(url, '_blank');
+  showToast('Abrindo WhatsApp...', 'success');
+}
+
+function reiniciar() {
+  location.reload();
+}
+
+// ===== TOAST =====
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type ? ' ' + type : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
